@@ -3,6 +3,8 @@ package dev.arnaldo.mission;
 import br.com.blecaute.inventory.InventoryHelper;
 import com.jaoow.sql.connector.type.impl.MySQLDatabaseType;
 import com.jaoow.sql.executor.SQLExecutor;
+import dev.arnaldo.mission.listener.PlayerInteractListener;
+import dev.arnaldo.mission.listener.PlayerJoinListener;
 import dev.arnaldo.mission.loader.Loader;
 import dev.arnaldo.mission.manager.ItemManager;
 import dev.arnaldo.mission.manager.UserManager;
@@ -14,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -91,6 +94,13 @@ public class Main extends JavaPlugin {
                 .map(ReflectionUtil::instance)
                 .filter(Objects::nonNull)
                 .forEach(loader -> loader.load(this));
+    }
+
+    private void registerListeners() {
+        PluginManager manager = Bukkit.getPluginManager();
+
+        manager.registerEvents(new PlayerJoinListener(this.userManager), this);
+        manager.registerEvents(new PlayerInteractListener(this.userManager, this.itemManager), this);
     }
 
 
