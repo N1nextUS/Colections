@@ -4,10 +4,12 @@ import dev.arnaldo.mission.Main;
 import dev.arnaldo.mission.loader.Loader;
 import dev.arnaldo.mission.manager.ItemManager;
 import dev.arnaldo.mission.model.Item;
+import dev.arnaldo.mission.util.item.ItemBuilder;
 import dev.arnaldo.mission.util.item.ItemUtil;
 import dev.arnaldo.mission.util.text.Text;
 import lombok.NonNull;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
@@ -27,7 +29,7 @@ public class ItemLoaderImpl implements Loader {
                     baseItem = Objects.requireNonNull(ItemUtil.setUnbreakable(baseItem, true));
                     baseItem = Objects.requireNonNull(ItemUtil.setInfo(baseItem, Item.NBT_KEY, section.getName()));
 
-                    itemManager.validate(new Item(section.getName(), name, baseItem));
+                    itemManager.validate(new Item(section.getName(), name, new ItemBuilder(baseItem).addItemFlags().toItemStack()));
                 });
 
         main.getLogger().info("Loaded " + itemManager.findAll().size() + " item(s)");

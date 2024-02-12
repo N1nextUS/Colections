@@ -106,7 +106,7 @@ items:
 # items message localized on last line of item lore
 items-placeholders:
   collect: '&eClique para coletar!'
-  collected: '&8Coletado em: {item_colletedAt}'
+  collected: '&8Coletado em: {item_collectedAt}'
 
 # collect inventory settings
 collect-inventory:

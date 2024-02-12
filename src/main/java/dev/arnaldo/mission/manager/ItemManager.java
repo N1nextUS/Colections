@@ -9,6 +9,7 @@ import dev.arnaldo.mission.util.item.ItemUtil;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -55,9 +56,12 @@ public class ItemManager {
         user.addItem(new UserItem(item.getId(), Instant.now(), true));
         if (user.getItems().size() >= Config.QUEST_AMOUNT_SETTING.asInt()) {
             Bukkit.broadcastMessage(Config.QUEST_COMPLETED_MESSAGE.asString().replace("{player}", player.getName()));
+            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1, 1);
+            return true;
         }
 
-        player.sendMessage(StringUtil.replaceItem(item, Config.ITEM_COLLECTED_SETTING.asString()));
+        player.sendMessage(StringUtil.replaceItem(item, Config.ITEM_COLLECTED_MESSAGE.asString()));
+        player.playSound(player.getLocation(), Sound.ITEM_PICKUP, 1, 1);
         return true;
     }
 

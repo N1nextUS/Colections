@@ -32,7 +32,7 @@ public class StringUtil {
     @NotNull
     @Contract("_, _, _, -> param3")
     public String[] replaceUserItem(@NonNull Item item, @NonNull UserItem userItem, String @NonNull... text) {
-        String[] values = {item.getId(), item.getName(), dateFormat.format(userItem.getCollectedAt())};
+        String[] values = {item.getId(), item.getName(), dateFormat.format(Date.from(userItem.getCollectedAt()))};
         return parse(text, values, userItemPlaceholders);
     }
 

@@ -13,10 +13,7 @@ import dev.arnaldo.mission.repository.user.UserRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Timestamp;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserRepositoryImpl implements UserRepository {
@@ -49,7 +46,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void save(@NotNull User user) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.save(user.getName(), new ArrayList<>(user.getItems()));
     }
 
     @Override

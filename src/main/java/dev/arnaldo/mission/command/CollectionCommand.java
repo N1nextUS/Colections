@@ -82,7 +82,11 @@ public class CollectionCommand {
                 return;
             }
 
-            consumer.accept(user);
+            try {
+                consumer.accept(user);
+            } catch (Exception exception) {
+                Main.getInstance().getLogger().log(Level.SEVERE, "command error", exception);
+            }
         });
     }
 

@@ -26,14 +26,10 @@ public class RankingInventoryImpl implements Inventory {
     private PaginatedConfiguration paginatedConfiguration;
 
     private Pair<Integer, ItemStack> menuItem;
-    private Pair<Integer, ItemStack> nextItem;
-    private Pair<Integer, ItemStack> backItem;
 
     @Override
     public void open(@NotNull Player player, @NotNull User user) {
         new InventoryBuilder<UserRanking>(inventoryConfiguration)
-                .withButton(Button.of(ButtonType.NEXT_PAGE, nextItem.getKey(), nextItem.getValue()))
-                .withButton(Button.of(ButtonType.PREVIOUS_PAGE, backItem.getKey(), backItem.getValue()))
                 .withObjects(paginatedConfiguration, userManager.findRankings(), click -> {})
                 .withItem(menuItem.getKey(), menuItem.getValue(), click ->
                         InventoryType.COLLECT.getInventory().open(player, user))
@@ -57,6 +53,7 @@ public class RankingInventoryImpl implements Inventory {
                 .build();
 
         this.menuItem = Pair.of(menuItemSection.getInt("slot"), ItemUtil.getItem(menuItemSection));
+        this.userManager = main.getUserManager();
     }
 
 }

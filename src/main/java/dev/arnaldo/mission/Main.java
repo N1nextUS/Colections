@@ -13,7 +13,6 @@ import dev.arnaldo.mission.command.resolver.ItemResolver;
 import dev.arnaldo.mission.command.resolver.help.HelpResolver;
 import dev.arnaldo.mission.command.suggestion.ItemSuggestion;
 import dev.arnaldo.mission.command.validator.PositiveValidator;
-import dev.arnaldo.mission.inventory.Inventory;
 import dev.arnaldo.mission.inventory.InventoryType;
 import dev.arnaldo.mission.listener.PlayerInteractListener;
 import dev.arnaldo.mission.listener.PlayerJoinListener;
@@ -22,11 +21,10 @@ import dev.arnaldo.mission.manager.ItemManager;
 import dev.arnaldo.mission.manager.UserManager;
 import dev.arnaldo.mission.repository.user.UserRepository;
 import dev.arnaldo.mission.repository.user.impl.UserRepositoryImpl;
+import dev.arnaldo.mission.task.AutoSaveTask;
 import dev.arnaldo.mission.util.ReflectionUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -67,7 +65,6 @@ public class Main extends JavaPlugin {
             registerInventories();
             registerCommands();
             registerTasks();
-            registerChunks();
 
         } catch (SQLException exception) {
             getLogger().log(Level.SEVERE, "Failed to connect to database!", exception);
@@ -150,5 +147,8 @@ public class Main extends JavaPlugin {
         replacer.invalidate();
     }
 
+    private void registerTasks() {
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new AutoSaveTask(), 0L, 20 * 60 * 5);
+    }
 
 }
