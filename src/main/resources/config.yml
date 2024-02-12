@@ -9,7 +9,33 @@ MySQL:
 # amount of items collected to complete the quest
 quest-amount: 2
 
-# mesages settings
+# command to open collection menu
+collection-command:
+  command: ['colecao', 'coleção']
+  description: 'Visualiza suas coleções.'
+  usage: 'coleção'
+
+# command to give collection
+item-give-command:
+  command: ['colecao give', 'coleção give']
+  description: 'Envia item para um jogador.'
+  permission: 'collection.give.command'
+  usage: 'coleção give <jogador> <item> <quantidade>'
+
+# command to redefine player collection
+reset-collection-command:
+  command: ['colecao reset', 'coleção reset']
+  description: 'Redefine as coleções de um jogador.'
+  permission: 'collection.reset.command'
+  usage: 'coleção reset <jogador>'
+
+# command to show available commands
+help-command:
+  command: ['colecao help', 'coleção help']
+  description: 'Mostra os comandos disponíveis.'
+  usage: 'coleção help'
+
+# messages settings
 messages:
   player-not-found: '&cJogador não encontrado!'
   no-permission: '&cVocê não tem permissão para fazer isso!'

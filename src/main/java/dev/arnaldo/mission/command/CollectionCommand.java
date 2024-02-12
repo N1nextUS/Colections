@@ -15,8 +15,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.bukkit.BukkitCommandActor;
 import revxrsal.commands.command.CommandActor;
+import revxrsal.commands.help.CommandHelp;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Collections;
@@ -26,10 +28,11 @@ import java.util.logging.Level;
 @RequiredArgsConstructor
 @SuppressWarnings("unused")
 @ParametersAreNonnullByDefault
-public class ChestplateCommand {
+public class CollectionCommand {
 
     private final UserManager userManager;
 
+    @DefaultFor("~")
     @HelpPosition(1)
     @CommandPath("collection-command")
     public void collection(BukkitCommandActor actor) {
@@ -57,6 +60,14 @@ public class ChestplateCommand {
         this.userManager.delete(target.getName());
 
         actor.reply(Config.ITEMS_REDEFINED_MESSAGE.asString().replace("{player}", target.getName()));
+    }
+
+    @HelpPosition(4)
+    @CommandPath("help-command")
+    public void help(BukkitCommandActor actor, CommandHelp<String> help) {
+        actor.reply("");
+        actor.reply(String.join("\n", help));
+        actor.reply("");
     }
 
     private void findUser(@NotNull CommandActor actor, @NotNull OfflinePlayer player, @NotNull Consumer<User> consumer) {

@@ -3,6 +3,16 @@ package dev.arnaldo.mission;
 import br.com.blecaute.inventory.InventoryHelper;
 import com.jaoow.sql.connector.type.impl.MySQLDatabaseType;
 import com.jaoow.sql.executor.SQLExecutor;
+import dev.arnaldo.mission.command.CollectionCommand;
+import dev.arnaldo.mission.command.adapter.CustomExceptionAdapter;
+import dev.arnaldo.mission.command.annotation.CommandPath;
+import dev.arnaldo.mission.command.reader.YamlLocaleReader;
+import dev.arnaldo.mission.command.replacer.CommandPathReplacer;
+import dev.arnaldo.mission.command.replacer.FileCommandReplacer;
+import dev.arnaldo.mission.command.resolver.ItemResolver;
+import dev.arnaldo.mission.command.resolver.help.HelpResolver;
+import dev.arnaldo.mission.command.suggestion.ItemSuggestion;
+import dev.arnaldo.mission.command.validator.PositiveValidator;
 import dev.arnaldo.mission.inventory.Inventory;
 import dev.arnaldo.mission.inventory.InventoryType;
 import dev.arnaldo.mission.listener.PlayerInteractListener;
@@ -20,7 +30,11 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import revxrsal.commands.bukkit.BukkitCommandHandler;
+import revxrsal.commands.help.CommandHelp;
+import revxrsal.commands.locales.Locales;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -109,6 +123,31 @@ public class Main extends JavaPlugin {
         for (InventoryType type : InventoryType.values()) {
             type.getInventory().load(this);
         }
+    }
+
+    private void registerCommands() {
+        YamlLocaleReader reader = new YamlLocaleReader(new File(getDataFolder(), "config.yml"), Locales.PORTUGUESE);
+
+        BukkitCommandHandler handler = BukkitCommandHandler.create(this);
+        FileCommandReplacer replacer = new FileCommandReplacer(this.getDataFolder());
+
+        handler.registerAnnotationReplacer(CommandPath.class, new CommandPathReplacer(replacer));
+
+        handler.registerParameterValidator(Number.class, new PositiveValidator());
+        handler.registerContextResolver(0, CommandHelp.class, new HelpResolver());
+
+        handler.registerValueResolverFactory(new ItemResolver());
+        handler.getAutoCompleter().registerSuggestionFactory(new ItemSuggestion());
+
+        handler.setHelpWriter((command, actor) -> String.format("§a/%s §7- %s", command.getUsage(), command.getDescription()));
+        handler.setExceptionHandler(new CustomExceptionAdapter());
+        handler.disableStackTraceSanitizing();
+
+        handler.getTranslator().setLocale(Locales.PORTUGUESE);
+        handler.getTranslator().add(reader);
+
+        handler.register(new CollectionCommand(this.userManager));
+        replacer.invalidate();
     }
 
 
