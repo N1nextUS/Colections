@@ -3,7 +3,9 @@ package dev.arnaldo.mission.manager;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.RemovalCause;
+import dev.arnaldo.mission.model.Config;
 import dev.arnaldo.mission.model.User;
+import dev.arnaldo.mission.model.UserItem;
 import dev.arnaldo.mission.model.UserRanking;
 import dev.arnaldo.mission.repository.user.UserRepository;
 import lombok.AccessLevel;
@@ -31,7 +33,7 @@ public class UserManager {
             }).buildAsync((key, executor) -> CompletableFuture.supplyAsync(() ->
                     getUserRepository().findById(key).orElse(null), executor));
 
-    private final Set<UserRanking> userRankings = new HashSet<>();
+    private Set<UserRanking> userRankings = new HashSet<>();
 
     public void validate(@NonNull User user) {
         this.cache.synchronous().put(user.getName().toLowerCase(), user);
@@ -77,9 +79,18 @@ public class UserManager {
         return Collections.unmodifiableSet(userRankings);
     }
 
+    public void updateRanking() {
+        this.userRankings = this.userRepository.findBySize(Config.QUEST_AMOUNT_SETTING.asInt());
+    }
+
     public void save() {
         List<User> users = cache.synchronous().asMap().values().stream().filter(User::isDirty).collect(Collectors.toList());
-        userRepository.save(users);
+        Map<String, List<UserItem>> map =  users.stream()
+                .collect(Collectors.toMap(User::getName, user -> user.getItems().stream()
+                        .filter(UserItem::isDirty)
+                        .collect(Collectors.toList())));
+
+        this.userRepository.save(map);
         users.forEach(user -> user.setDirty(false));
     }
 

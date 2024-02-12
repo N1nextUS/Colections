@@ -36,8 +36,16 @@ public class User {
         this.items.remove(id);
     }
 
-    public void setItems(List<UserItem> items) {
+    public void setItems(@NonNull List<UserItem> items) {
         this.items = items.stream().collect(Collectors.toMap(UserItem::getId, Function.identity()));
+    }
+
+    public boolean isDirty() {
+        return this.items.values().stream().anyMatch(UserItem::isDirty);
+    }
+
+    public void setDirty(boolean value) {
+        this.items.values().forEach(item -> item.setDirty(value));
     }
 
     @Unmodifiable
