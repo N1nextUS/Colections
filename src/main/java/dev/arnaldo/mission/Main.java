@@ -49,6 +49,9 @@ public class Main extends JavaPlugin {
     private UserManager userManager;
     private ItemManager itemManager;
 
+    private YamlLocaleReader reader;
+
+
     @Override
     public void onEnable() {
         instance = this;
@@ -77,6 +80,14 @@ public class Main extends JavaPlugin {
         if (this.userManager != null) {
             this.userManager.save();
         }
+    }
+
+    public void reload() {
+        this.reloadConfig();
+        this.reader.loadMessages();
+
+        registerLoaders();
+        registerInventories();
     }
 
     private void registerDatabase() throws SQLException {
@@ -123,7 +134,7 @@ public class Main extends JavaPlugin {
     }
 
     private void registerCommands() {
-        YamlLocaleReader reader = new YamlLocaleReader(new File(getDataFolder(), "config.yml"), Locales.PORTUGUESE);
+        reader = new YamlLocaleReader(new File(getDataFolder(), "config.yml"), Locales.PORTUGUESE);
 
         BukkitCommandHandler handler = BukkitCommandHandler.create(this);
         FileCommandReplacer replacer = new FileCommandReplacer(this.getDataFolder());

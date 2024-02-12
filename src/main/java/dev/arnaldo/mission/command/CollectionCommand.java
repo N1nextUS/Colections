@@ -63,6 +63,13 @@ public class CollectionCommand {
     }
 
     @HelpPosition(4)
+    @CommandPath("reload-command")
+    public void reload(BukkitCommandActor actor) {
+        Main.getInstance().reload();
+        actor.reply(Config.PLUGIN_RELOADED_MESSAGE.asString());
+    }
+
+    @HelpPosition(5)
     @CommandPath("help-command")
     public void help(BukkitCommandActor actor, CommandHelp<String> help) {
         actor.reply("");

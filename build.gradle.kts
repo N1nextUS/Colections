@@ -17,6 +17,7 @@ repositories {
     maven("https://jitpack.io")
     maven("https://repo.codemc.io/repository/nms/")
     maven("https://maven.pkg.github.com/srblecaute01/inventoryhelper")
+    maven("https://repo.dmulloy2.net/repository/public/")
 }
 
 dependencies {
@@ -25,6 +26,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.26")
 
     compileOnly("org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT")
+    compileOnly("com.comphenix.protocol:ProtocolLib:5.1.0")
 
     implementation("br.com.blecaute:inventory-helper:1.5.1")
     implementation("com.github.Revxrsal.Lamp:common:3.1.9")
@@ -79,5 +81,6 @@ tasks.withType<ShadowJar> {
     relocate("org.apache.commons.logging", "dev.arnaldo.mission.libs.apache")
     relocate("org.checkerframework", "dev.arnaldo.mission.libs.checkerframework")
     relocate("revxrsal.commands", "dev.arnaldo.mission.libs.lamp")
+    relocate("com.jaoow.sql", "dev.arnaldo.mission.libs.executor")
 
 }

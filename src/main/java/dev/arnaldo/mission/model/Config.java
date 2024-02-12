@@ -8,6 +8,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public enum Config {
 
+    PLUGIN_RELOADED_MESSAGE("messages.plugin-reloaded"),
     PLAYER_NOT_FOUND_MESSAGE("messages.player-not-found"),
 
     INVALID_ITEM_MESSAGE("messages.invalid-item"),

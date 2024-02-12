@@ -52,6 +52,7 @@ public class PlayerInteractListener implements Listener {
             player.setItemInHand(null);
         });
 
+        player.updateInventory();
         event.setCancelled(true);
     }
 

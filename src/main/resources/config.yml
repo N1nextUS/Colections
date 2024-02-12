@@ -29,6 +29,13 @@ reset-collection-command:
   permission: 'collection.reset.command'
   usage: 'coleção reset <jogador>'
 
+# command to reload plugin
+reload-command:
+  command: ['colecao reload', 'coleção reload']
+  description: 'Recarrega o plugin.'
+  permission: 'collection.reload.command'
+  usage: 'coleção reload'
+
 # command to show available commands
 help-command:
   command: ['colecao help', 'coleção help']
@@ -37,6 +44,7 @@ help-command:
 
 # messages settings
 messages:
+  plugin-reloaded: '&aPlugin recarregado com sucesso!'
   player-not-found: '&cJogador não encontrado!'
   no-permission: '&cVocê não tem permissão para fazer isso!'
 
