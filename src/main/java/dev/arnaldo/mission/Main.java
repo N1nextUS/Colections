@@ -3,6 +3,8 @@ package dev.arnaldo.mission;
 import br.com.blecaute.inventory.InventoryHelper;
 import com.jaoow.sql.connector.type.impl.MySQLDatabaseType;
 import com.jaoow.sql.executor.SQLExecutor;
+import dev.arnaldo.mission.inventory.Inventory;
+import dev.arnaldo.mission.inventory.InventoryType;
 import dev.arnaldo.mission.listener.PlayerInteractListener;
 import dev.arnaldo.mission.listener.PlayerJoinListener;
 import dev.arnaldo.mission.loader.Loader;
@@ -101,6 +103,12 @@ public class Main extends JavaPlugin {
 
         manager.registerEvents(new PlayerJoinListener(this.userManager), this);
         manager.registerEvents(new PlayerInteractListener(this.userManager, this.itemManager), this);
+    }
+
+    private void registerInventories() {
+        for (InventoryType type : InventoryType.values()) {
+            type.getInventory().load(this);
+        }
     }
 
 

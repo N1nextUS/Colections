@@ -82,10 +82,90 @@ items-placeholders:
   collect: '&eClique para coletar!'
   collected: '&8Coletado em: {item_colletedAt}'
 
+# collect inventory settings
+collect-inventory:
+  # inventory title
+  title: '&8Coleções'
+  # item to open ranking
+  ranking-item:
+    # inventory slot
+    slot: 49
+    skull:
+      enabled: false
+      url: ''
+    material: 'EMERALD'
+    data: 0
+    name: '&aTop'
+    lore:
+      - '&7Clique para visualizar o rank'
+
+  # item to open the previous page
+  previous-item:
+    slot: 48
+    skull:
+      enabled: false
+      url: ''
+    material: 'ARROW'
+    data: 0
+    name: '&ePágina anterior'
+    lore:
+      - '&7Clique para voltar a página'
+
+  # item to open the next page
+  next-item:
+    slot: 50
+    skull:
+      enabled: false
+      url: ''
+    material: 'ARROW'
+    data: 0
+    name: '&ePróxima página'
+    lore:
+      - '&7Clique para avançar a página'
+
 # ranking inventory settings
 ranking-inventory:
+  # inventory title
+  title: '&8Coleções - Top'
   # rank item format
   format:
     name: '&a#{ranking_pos} {ranking_name}'
     lore:
       - '&7Completada em: &f&e{ranking_completedAt}'
+
+  # item to open menu
+  menu-item:
+    # inventory slot
+    slot: 40
+    skull:
+      enabled: false
+      url: ''
+    material: 'PAPER'
+    data: 0
+    name: '&aMenu'
+    lore:
+      - '&7Clique para voltar ao menu'
+
+  # item to open the previous page
+  previous-item:
+    slot: 39
+    skull:
+      enabled: false
+      url: ''
+    material: 'ARROW'
+    data: 0
+    name: '&ePágina anterior'
+    lore:
+      - '&7Clique para voltar a página'
+
+  # item to open the next page
+  next-item:
+    slot: 41
+    skull:
+      enabled: false
+      url: ''
+    material: 'ARROW'
+    data: 0
+    name: '&ePróxima página'
+    lore:
+      - '&7Clique para avançar a página'

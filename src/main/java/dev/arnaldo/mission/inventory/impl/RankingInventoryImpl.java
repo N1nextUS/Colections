@@ -11,12 +11,14 @@ import dev.arnaldo.mission.inventory.InventoryType;
 import dev.arnaldo.mission.manager.UserManager;
 import dev.arnaldo.mission.model.User;
 import dev.arnaldo.mission.model.UserRanking;
+import dev.arnaldo.mission.util.item.ItemUtil;
 import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class TopInventoryImpl implements Inventory {
+public class RankingInventoryImpl implements Inventory {
 
     private UserManager userManager;
 
@@ -40,7 +42,21 @@ public class TopInventoryImpl implements Inventory {
 
     @Override
     public void load(@NotNull Main main) {
+        ConfigurationSection section = main.getConfig().getConfigurationSection("ranking-inventory");
 
+        ConfigurationSection menuItemSection = section.getConfigurationSection("menu-item");
+        ConfigurationSection previousItemSection = section.getConfigurationSection("previous-item");
+        ConfigurationSection nextItemSection = section.getConfigurationSection("next-item");
+
+        this.inventoryConfiguration = InventoryConfiguration.builder(section.getString("title"), 5).build();
+        this.paginatedConfiguration = PaginatedConfiguration.builder("#ranking")
+                .start(11).end(25).size(10)
+                .validator(slot -> slot > 15 && slot < 20)
+                .button(Button.of(ButtonType.PREVIOUS_PAGE, previousItemSection.getInt("slot"), ItemUtil.getItem(previousItemSection)))
+                .button(Button.of(ButtonType.NEXT_PAGE, nextItemSection.getInt("slot"), ItemUtil.getItem(nextItemSection)))
+                .build();
+
+        this.menuItem = Pair.of(menuItemSection.getInt("slot"), ItemUtil.getItem(menuItemSection));
     }
 
 }

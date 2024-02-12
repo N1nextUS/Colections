@@ -1,7 +1,7 @@
 package dev.arnaldo.mission.inventory;
 
 import dev.arnaldo.mission.inventory.impl.CollectInventoryImpl;
-import dev.arnaldo.mission.inventory.impl.TopInventoryImpl;
+import dev.arnaldo.mission.inventory.impl.RankingInventoryImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public enum InventoryType {
 
     COLLECT(new CollectInventoryImpl()),
-    TOP(new TopInventoryImpl());
+    RANKING(new RankingInventoryImpl());
 
     private final Inventory inventory;
 
