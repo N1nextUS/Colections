@@ -1,0 +1,8 @@
+
+# database settings
+MySQL:
+  host: 'localhost:3306'
+  database: 'test'
+  username: 'root'
+  password: 'admin'
+
