@@ -9,6 +9,8 @@ import dev.arnaldo.mission.repository.user.UserRepository;
 import dev.arnaldo.mission.repository.user.impl.UserRepositoryImpl;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 

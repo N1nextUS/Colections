@@ -45,6 +45,7 @@ public class ChestplateCommand {
 
         PlayerUtil.give(target, itemStack);
         actor.reply(Config.ITEM_SENT_MESSAGE.asString()
+                .replace("{item}", item.getName())
                 .replace("{player}", target.getName())
                 .replace("{amount}", String.valueOf(amount)));
     }

@@ -17,7 +17,7 @@ import java.util.Date;
 public class StringUtil {
 
     private final String[] itemPlaceholders = {"{item_id}", "{item_name}"};
-    private final String[] userItemPlaceholders = {"{item_id}", "{item_collectedAt}"};
+    private final String[] userItemPlaceholders = {"{item_id}", "{item_name}", "{item_collectedAt}"};
     private final String[] rankingPlaceholders = {"{ranking_pos}", "{ranking_name}", "{ranking_completedAt}"};
 
     private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -30,9 +30,9 @@ public class StringUtil {
     }
 
     @NotNull
-    @Contract("_, _, -> param2")
-    public String[] replaceUserItem(@NonNull UserItem item, String @NonNull... text) {
-        String[] values = {item.getId(), dateFormat.format(item.getCollectedAt())};
+    @Contract("_, _, _, -> param3")
+    public String[] replaceUserItem(@NonNull Item item, @NonNull UserItem userItem, String @NonNull... text) {
+        String[] values = {item.getId(), item.getName(), dateFormat.format(userItem.getCollectedAt())};
         return parse(text, values, userItemPlaceholders);
     }
 

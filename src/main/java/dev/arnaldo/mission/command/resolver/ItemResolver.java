@@ -17,7 +17,7 @@ public class ItemResolver implements ValueResolverFactory {
         if (!Item.class.isAssignableFrom(parameter.getType())) return null;
         return context -> Main.getInstance().getItemManager()
                 .find(context.pop())
-                .orElseThrow(() -> new CommandErrorException(Config.INSERT_VALID_ITEM_MESSAGE.asString()));
+                .orElseThrow(() -> new CommandErrorException(Config.INVALID_ITEM_MESSAGE.asString()));
     }
 
 

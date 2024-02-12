@@ -38,7 +38,7 @@ public class UserItem implements InventoryItem {
         Item item = manager.find(this.id).orElse(null);
         if (item == null) return null;
 
-        String lore = StringUtil.replaceUserItem(this, Config.ITEM_COLLECTED_MESSAGE.asString())[0];
+        String lore = StringUtil.replaceUserItem(item, this, Config.ITEM_COLLECTED_MESSAGE.asString())[0];
         return new ItemBuilder(item.getBaseItem().clone()).addLoreLine(lore).toItemStack();
     }
 

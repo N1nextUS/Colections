@@ -6,3 +6,86 @@ MySQL:
   username: 'root'
   password: 'admin'
 
+# amount of items collected to complete the quest
+quest-amount: 2
+
+# mesages settings
+messages:
+  player-not-found: '&cJogador não encontrado!'
+  no-permission: '&cVocê não tem permissão para fazer isso!'
+
+  must-be-player: '&cSomente jogadores podem fazer isso!'
+  must-be-console: '&cEsse comando não é acessível para jogadores!'
+
+  item-sent: '&aVocê enviou {amount}x {item} para o jogador {player}!'
+  item-collected: '&aVocê coletou um item colecionável: &7{item_name}'
+  item-already-collected: '&cVocê já coletou um item desse mesmo tipo!'
+  items-redefined: '&aOs itens do jogador {player} foram redefinidiso!'
+
+  invalid-item: '&cPor favor insira um item válido!'
+  invalid-number: '&cPor favor insira um número válido!'
+  invalid-player: '&cO jogador {0} não é um jogador válido!'
+  invalid-command: '&cComando inválido tente: {0}'
+  invalid-subcommand: '&cComando inválido tente: {0}'
+
+  missing-argument: '&cVocê precisa inserir corretamente os argumentos! Uso correto: {1}'
+  too-many-arguments: '&cComando inválido tente: {0}'
+  no-subcommand-specified: '&cInsira o subcomando!'
+
+  quest-completed:
+    - ' '
+    - '&eO jogador {player} achou todos os itens colecionáveis!'
+    - ' '
+
+items:
+  # The item id, not modify after use of the item.
+  1:
+    # the item name
+    name: 'Peitoral Verde'
+    # item settings
+    item:
+      skull:
+        enabled: false
+        url: ''
+      material: 'LEATHER_CHESTPLATE'
+      data: 0
+      name: '&aPeitoral Verde'
+      lore:
+        - '&7Esse é um item colecionável!'
+        - ''
+      color:
+        r: 0
+        g: 255
+        b: 0
+
+  2:
+    # the item name
+    name: 'Peitoral Vermelho'
+    # item settings
+    item:
+      skull:
+        enabled: false
+        url: ''
+      material: 'LEATHER_CHESTPLATE'
+      data: 0
+      name: '&cPeitoral Vermelho'
+      lore:
+        - '&7Esse é um item colecionável!'
+        - ''
+      color:
+        r: 255
+        g: 0
+        b: 0
+
+# items message localized on last line of item lore
+items-placeholders:
+  collect: '&eClique para coletar!'
+  collected: '&8Coletado em: {item_colletedAt}'
+
+# ranking inventory settings
+ranking-inventory:
+  # rank item format
+  format:
+    name: '&a#{ranking_pos} {ranking_name}'
+    lore:
+      - '&7Completada em: &f&e{ranking_completedAt}'

@@ -10,22 +10,21 @@ public enum Config {
 
     PLAYER_NOT_FOUND_MESSAGE("messages.player-not-found"),
 
-    INSERT_VALID_ITEM_MESSAGE("messages.insert-valid-item"),
+    INVALID_ITEM_MESSAGE("messages.invalid-item"),
 
     ITEM_ALREADY_COLLECTED_MESSAGE("messages.item-already-collected"),
-    ITEM_COLLECTED_MESSAGE(""),
+    ITEM_COLLECTED_MESSAGE("messages.item-collected"),
     ITEM_SENT_MESSAGE("messages.item-sent"),
     ITEMS_REDEFINED_MESSAGE("messages.items-redefined"),
+    QUEST_COMPLETED_MESSAGE("messages.quest-completed"),
 
-    QUEST_COMPLETED_MESSAGE(""),
+    QUEST_AMOUNT_SETTING("quest-amount"),
 
-    QUEST_AMOUNT_SETTING(""),
+    ITEM_COLLECTED_SETTING("items-placeholders.collected"),
+    ITEM_COLLECT_SETTING("items-placeholders.collect"),
 
-    ITEM_COLLECTED_SETTING(""),
-    ITEM_COLLECT_SETTING(""),
-
-    USER_RANKING_NAME_SETTING(""),
-    USER_RANKING_LORE_SETTING(""),
+    USER_RANKING_NAME_SETTING("ranking-inventory.format.name"),
+    USER_RANKING_LORE_SETTING("ranking-inventory.format.lore"),
 
     ;
 

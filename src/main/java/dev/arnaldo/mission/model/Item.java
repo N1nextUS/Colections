@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 @Data
 public class Item {
 
-    public static final String NBT_KEY = "vikings.nbt";
+    public static final String NBT_KEY = "sunrise.mission.nbt";
 
     @NonNull
     private String id;
